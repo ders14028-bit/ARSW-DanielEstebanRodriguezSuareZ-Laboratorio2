@@ -1,4 +1,4 @@
-# Lab 2 - Barrier Synchronization Pattern
+# Barrier Synchronization Pattern
 
 **Author:** Daniel Esteban Rodriguez Suarez
 
