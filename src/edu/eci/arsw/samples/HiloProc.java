@@ -1,18 +1,23 @@
 package edu.eci.arsw.samples;
 
 import java.util.Random;
+import java.util.concurrent.CyclicBarrier;
 
 public class HiloProc extends Thread{
 
 	int waitPeriod=0;
 	int idHilo=0;
 	long resultado=0;
+
+	CyclicBarrier barrier;
 	
-	public HiloProc(int id){
+	public HiloProc(int id, CyclicBarrier barrier){
+
+		this.barrier = barrier;
+
 		try {
 			Thread.sleep(10);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		waitPeriod=Math.abs(new Random(System.currentTimeMillis()).nextInt()%5000);
@@ -31,6 +36,12 @@ public class HiloProc extends Thread{
 			}
 		}
 		resultado=System.currentTimeMillis()-startTime;
+
+		try {
+    		barrier.await();
+		} catch (Exception e) {
+    		throw new RuntimeException(e);
+		}
 	}
 	
 	
